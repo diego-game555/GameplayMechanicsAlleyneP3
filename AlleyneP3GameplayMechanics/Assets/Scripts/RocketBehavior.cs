@@ -21,8 +21,8 @@ public class RocketBehavior : MonoBehaviour
     {
         if(homing && target != null)
         {
-            Vector3 moveDirection = (target.tansform.position - transform.position).normalized;
-            transform.position += moveDirection * speed * aliveTimer.deltaTime;
+            Vector3 moveDirection = (target.transform.position - transform.position).normalized;
+            transform.position += moveDirection * speed * Time.deltaTime;
             transform.LookAt(target);
         }
     }
@@ -40,7 +40,7 @@ public class RocketBehavior : MonoBehaviour
         {
             if (col.gameObject.CompareTag(target.tag))
             {
-                Rigidbody targetRigidbody = col.GameObject.GetComponent<targetRigidbody>();
+                Rigidbody targetRigidbody = col.gameObject.GetComponent<Rigidbody>();
                 Vector3 away = -col.contacts[0].normal;
                 targetRigidbody.AddForce(away * rocketStrength, ForceMode.Impulse);
                 Destroy(gameObject);
